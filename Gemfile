@@ -12,12 +12,13 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'high_voltage'
 gem 'devise_token_auth'
+# gem 'omniauth'
 
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'
   gem 'rails_layout'
-  gem 'spring-commands-rspec'
+  # gem 'spring-commands-rspec'
   gem 'pry-rails'
   gem 'bullet'
 end
@@ -27,7 +28,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
-  gem 'spring'
+  # gem 'spring'
 end
 group :test do
   gem 'capybara'
