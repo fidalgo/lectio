@@ -1,4 +1,4 @@
-class LinksController < ApplicationController
+class LinksController < ApiController
   before_action :authenticate_user!
   before_action :set_link, only: [:show, :edit, :update, :destroy]
 
