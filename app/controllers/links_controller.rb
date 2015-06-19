@@ -1,6 +1,6 @@
-class LinksController < ApiController
+class LinksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_link, only: [:show, :edit, :update, :destroy, :read]
 
   # GET /links
   # GET /links.json
@@ -11,6 +11,24 @@ class LinksController < ApiController
   # GET /links/1
   # GET /links/1.json
   def show
+  end
+
+  def read
+    logger.info "Read link" + @link.id.to_s
+    if @link.read
+      @link.read = false
+    else
+      @link.read = true
+    end
+    respond_to do |format|
+      if @link.save
+        flash[:notice] = 'That was great!'
+        format.js {}
+      else
+        notice 'Bad news'
+      end
+    end
+
   end
 
   # GET /links/new
@@ -67,7 +85,7 @@ class LinksController < ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
-      @link = Link.find(params[:id])
+      @link = current_user.links.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

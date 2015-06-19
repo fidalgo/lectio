@@ -1,0 +1,13 @@
+<td><%= time_ago_in_words(link.created_at) %></td>
+<td><%= link_to link.title, link %></td>
+<td><%= link_to read_link_path(link), remote: true do %>
+  <% if link.read %>
+    <i class="glyphicon glyphicon-eye-close"></i>
+  <% else %>
+  <i class="glyphicon glyphicon-eye-open"></i>
+  <% end %>
+<% end %></td>
+<td><%= link_to link, method: :delete, data: { confirm: 'Are you sure?' } do%>
+  <i class="glyphicon glyphicon-remove"></i>
+  <% end %>
+</td>

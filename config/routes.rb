@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :links
+  resources :links do
+    member do
+      get 'read'
+    end
+  end
 
   root to: 'visitors#index'
 
@@ -9,5 +13,5 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for 'User', at: '/auth'
     end
   end
-  
+
 end
