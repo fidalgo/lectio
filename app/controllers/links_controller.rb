@@ -14,7 +14,6 @@ class LinksController < ApplicationController
   end
 
   def read
-    logger.info "Read link" + @link.id.to_s
     if @link.read
       @link.read = false
     else
@@ -22,13 +21,9 @@ class LinksController < ApplicationController
     end
     respond_to do |format|
       if @link.save
-        flash[:notice] = 'That was great!'
+        flash.notice = "The link was marked as #{@link.status}!"
         format.js {}
-      else
-        notice 'Bad news'
-      end
     end
-
   end
 
   # GET /links/new

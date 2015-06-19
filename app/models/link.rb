@@ -4,4 +4,8 @@ class Link < ActiveRecord::Base
 
   belongs_to :user
 
+  def status
+    self.read ? 'readed' : 'unreaded'
+  end
+
 end
