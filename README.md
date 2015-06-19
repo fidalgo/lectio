@@ -1,48 +1,27 @@
 Lectio
 ================
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+### Lectio is a link keeper application, allowing to save the links for later read.
 
-Rails Composer is open source and supported by subscribers. Please join RailsApps to support development of Rails Composer.
 
-Problems? Issues?
+-----------
+Contributions
+-----------
+I have created this project with the purpose to exercise my Ruby on Rails skills,
+mainly testing, which I'm currently more focused.
+
+If have comments or suggestions please let me know, as my only purpose is to improve.
+See bellow on how to contact me.
+
+-----------
+License
 -----------
 
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
+Lectio is released under the [MIT License](http://www.opensource.org/licenses/MIT).
 
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
+-----------
+Contact
+-----------
+[@kanniball](https://twitter.com/kanniball)
 
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
-
-Ruby on Rails
--------------
-
-This application requires:
-
-- Ruby 2.2.0
-- Rails 4.2.0
-
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
-Getting Started
----------------
-
-Documentation and Support
--------------------------
-
-Issues
--------------
-
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
+[StackOverflow](http://stackoverflow.com/users/1006863/paulo-fidalgo)
