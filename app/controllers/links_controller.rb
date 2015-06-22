@@ -14,15 +14,12 @@ class LinksController < ApplicationController
   end
 
   def read
-    if @link.read
-      @link.read = false
-    else
-      @link.read = true
-    end
+    @link.read ? false : true
     respond_to do |format|
       if @link.save
         flash.notice = "The link was marked as #{@link.status}!"
         format.js {}
+      end
     end
   end
 
@@ -78,13 +75,13 @@ class LinksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_link
-      @link = current_user.links.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_link
+    @link = current_user.links.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def link_params
-      params.require(:link).permit(:url, :title)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def link_params
+    params.require(:link).permit(:url, :title)
+  end
 end
