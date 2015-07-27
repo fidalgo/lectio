@@ -14,7 +14,7 @@ class LinksController < ApplicationController
   end
 
   def read
-    @link.read ? false : true
+    @link.read = @link.read ? false : true
     respond_to do |format|
       if @link.save
         flash.notice = "The link was marked as #{@link.status}!"
