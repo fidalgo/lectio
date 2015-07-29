@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_link, only: [:show, :edit, :update, :destroy, :read]
+  before_action :link, only: [:show, :edit, :update, :destroy, :read]
 
   # GET /links
   # GET /links.json
@@ -14,10 +14,10 @@ class LinksController < ApplicationController
   end
 
   def read
-    @link.read = @link.read ? false : true
+    link.read = link.read ? false : true
     respond_to do |format|
-      if @link.save
-        flash.notice = "The link was marked as #{@link.status}!"
+      if link.save
+        flash.notice = "The link was marked as #{link.status}!"
         format.js {}
       end
     end
@@ -36,10 +36,10 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @link = Link.new(link_params)
-    @link.user = current_user
+    link.user = current_user
 
     respond_to do |format|
-      if @link.save
+      if link.save
         URLParser.new(@link.url).update_title
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
@@ -54,7 +54,7 @@ class LinksController < ApplicationController
   # PATCH/PUT /links/1.json
   def update
     respond_to do |format|
-      if @link.update(link_params)
+      if link.update(link_params)
         format.html { redirect_to @link, notice: 'Link was successfully updated.' }
         format.json { render :show, status: :ok, location: @link }
       else
@@ -67,7 +67,7 @@ class LinksController < ApplicationController
   # DELETE /links/1
   # DELETE /links/1.json
   def destroy
-    @link.destroy
+    link.destroy
     respond_to do |format|
       format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
       format.json { head :no_content }
@@ -75,9 +75,9 @@ class LinksController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_link
-    @link = current_user.links.find(params[:id])
+
+  def link
+    @link ||= current_user.links.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
