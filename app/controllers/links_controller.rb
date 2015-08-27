@@ -40,8 +40,7 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if link.save
-        # TODO: Refactor this is a shot on Single Responsabily principle
-        URLParser.new(@link.url).update_title
+        UrlScrapperJob.perform_later @link
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else

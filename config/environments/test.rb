@@ -40,7 +40,9 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-# Eager load files from /lib folder
+  # Eager load files from /lib folder
   config.eager_load_paths += %W(#{config.root}/lib)
   config.eager_load_paths += Dir["#{config.root}/lib/**/"]
+
+  config.active_job.queue_adapter = :test
 end

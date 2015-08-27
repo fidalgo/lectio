@@ -12,7 +12,7 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'high_voltage'
 gem 'devise_token_auth'
-# gem 'omniauth'
+gem 'delayed_job_active_record'
 
 group :development do
   gem 'better_errors'
@@ -31,6 +31,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
 end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
