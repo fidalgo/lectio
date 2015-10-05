@@ -13,6 +13,7 @@ gem 'bootstrap-sass'
 gem 'high_voltage'
 gem 'devise_token_auth'
 gem 'delayed_job_active_record'
+gem 'kaminari'
 
 group :development do
   gem 'better_errors'
