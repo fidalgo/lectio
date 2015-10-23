@@ -10,8 +10,8 @@ class LinksController < ApplicationController
 
   # GET /links/1
   # GET /links/1.json
-  def show
-  end
+  # def show
+  # end
 
   def read
     link.read = link.read ? false : true
@@ -41,7 +41,7 @@ class LinksController < ApplicationController
     respond_to do |format|
       if link.save
         UrlScrapperJob.perform_later @link
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
+        format.html { redirect_to links_url, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else
         format.html { render :new }
