@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827104926) do
+ActiveRecord::Schema.define(version: 20151022105914) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -32,10 +32,11 @@ ActiveRecord::Schema.define(version: 20150827104926) do
   create_table "links", force: :cascade do |t|
     t.string   "url"
     t.string   "title"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "user_id"
-    t.boolean  "read",       default: false
+    t.boolean  "read",        default: false
+    t.string   "description"
   end
 
   add_index "links", ["user_id"], name: "index_links_on_user_id"

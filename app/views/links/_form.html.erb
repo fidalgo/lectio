@@ -1,3 +1,5 @@
+
+
 <%= form_for(@link) do |f| %>
   <% if @link.errors.any? %>
     <div id="error_explanation">
@@ -11,10 +13,18 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group field">
     <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.text_field :url, autofocus: true, class: "form-control" %>
   </div>
+
+  <% if action_name == 'edit'%>
+  <div class="form-group field">
+    <%= f.label :read %><br>
+<%= f.check_box :read %>
+</div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit 'Save', class: 'btn btn-default' %>
   </div>

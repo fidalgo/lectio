@@ -40,7 +40,7 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if link.save
-        UrlScrapperJob.perform_later @link
+        UrlScrapperJob.perform_later @link.id
         format.html { redirect_to links_url, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else
@@ -55,7 +55,8 @@ class LinksController < ApplicationController
   def update
     respond_to do |format|
       if link.update(link_params)
-        format.html { redirect_to @link, notice: 'Link was successfully updated.' }
+        UrlScrapperJob.perform_later @link.id
+        format.html { redirect_to links_url, notice: 'Link was successfully updated.' }
         format.json { render :show, status: :ok, location: @link }
       else
         format.html { render :edit }

@@ -15,3 +15,9 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+// Initialise all popover's
+options = { 'html': true};
+$(function () {
+  $('[data-toggle="popover"]').popover(options)
+})

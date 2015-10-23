@@ -1,15 +1,40 @@
-<td><%= time_ago_in_words(link.created_at) %></td>
-<td><%= link_to link.description, link %></td>
-<td><%= link_to read_link_path(link), remote: true do %>
-  <% if link.read %>
-  <i class="glyphicon glyphicon-eye-close"></i>
-  <% else %>
-  <i class="glyphicon glyphicon-eye-open"></i>
-  <% end %>
-  <% end %>
-</td>
-<td>
-  <%= link_to link, method: :delete, data: { confirm: 'Are you sure?' } do %>
-  <i class="glyphicon glyphicon-remove"></i>
-  <% end %>
-</td>
+<div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <%= link_to link.title, link.url, target: '_blank' %></h3>
+      </div>
+      <div class="panel-body">
+        <%= link.description %>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <%= time_ago_in_words(link.created_at) %>
+          </div>
+          <div class="col-md-6">
+            <div class="pull-right">
+              <%= link_to edit_link_path(link), class: 'btn btn-default btn-xs' do %>
+              <i class="glyphicon glyphicon-edit"></i>
+              <% end %>
+              <%= link_to read_link_path(link), remote: true, class: 'btn btn-default btn-xs' do %>
+              <% if link.read %>
+              <i class="glyphicon glyphicon-eye-close"></i>
+              <% else %>
+              <i class="glyphicon glyphicon-eye-open"></i>
+              <% end %>
+              <% end %>
+
+              <button type="button" class="btn btn-danger btn-xs" data-container="body"
+              data-toggle="popover" data-placement="top" data-trigger="focus"
+              data-content='<button type="button" class="btn btn-success">Cancel</button>
+              <%= link_to "Delete", link, method: :delete, class: "btn btn-danger" %>' >
+              <i class="glyphicon glyphicon-remove"></i>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
