@@ -13,6 +13,9 @@
   <![endif]-->
   <title><%= content_for?(:title) ? yield(:title) : "Lectio" %></title>
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Lectio" %>">
+  <link rel="shortcut icon mask-icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" href="/favicon.png">
+
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
