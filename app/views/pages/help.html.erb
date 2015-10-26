@@ -1,0 +1,27 @@
+<% content_for :title do %>Help<% end %>
+<h2>How to add links</h2>
+<p>
+  To add links to Lectio you can use the above button in your browser.
+</p>
+
+<a class="btn btn-default" title="Read This" href='javascript:
+(function(){
+  open("<%= root_url + new_link_path + "?url="%>" + window.location, "NewLink", "toolbar=no,menubar=no,location=no");
+})()'>
+✚ Lectio
+</a>
+<p>
+  Just make sure you have your boorkmarks toolbar visible and drag the button
+  over it.
+</p>
+
+<h4>How to enable bookmarks toolbar in your browser</h4>
+
+<ul>
+  <li>
+    Mozilla Firefox: Right-click over the toolbar -> Bookmarks Toolbar
+  </li>
+  <li>
+    Google chrome: Menu -> Bookmarks -> Show bookmarks bar
+  </li>
+</ul>
