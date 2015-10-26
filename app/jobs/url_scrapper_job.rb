@@ -1,9 +1,8 @@
-require 'pry'
-
 # Fetches the URL and get the Title to update the Link
 class UrlScrapperJob < ActiveJob::Base
   queue_as :default
 
+# TODO: Add ruby-readability when we have no description
   def perform(link_id)
     link = Link.find(link_id)
     response = HTTParty.get(link.url)
