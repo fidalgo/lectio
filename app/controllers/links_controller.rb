@@ -5,7 +5,7 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @links = current_user.links.page params[:page]
+    @links = current_user.links.order(read: :asc).order(created_at: :desc).page params[:page]
   end
 
   # GET /links/1
@@ -25,7 +25,8 @@ class LinksController < ApplicationController
 
   # GET /links/new
   def new
-    @link = Link.new
+    logger.info params
+    @link = Link.new(url: params[:url])
   end
 
   # GET /links/1/edit
