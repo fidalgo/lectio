@@ -15,6 +15,7 @@ gem 'devise_token_auth'
 gem 'delayed_job_active_record'
 gem 'kaminari'
 gem 'httparty'
+gem 'acts-as-taggable-on'
 
 group :development do
   gem 'better_errors'

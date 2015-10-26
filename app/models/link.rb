@@ -1,4 +1,5 @@
 class Link < ActiveRecord::Base
+  acts_as_taggable
   validates_presence_of :url
   belongs_to :user
   paginates_per 16
