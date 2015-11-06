@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     member do
       get 'read'
     end
+    collection do
+    get 'tags'
+  end
   end
 
   root to: 'visitors#index'

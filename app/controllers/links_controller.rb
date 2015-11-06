@@ -8,6 +8,14 @@ class LinksController < ApplicationController
     @links = current_user.links.order(read: :asc).order(created_at: :desc).page params[:page]
   end
 
+# GET /tags/#{query}.json
+  def tags
+      if params[:query].present?
+
+      end
+      render json: current_user.owned_tags
+  end
+
   # GET /links/1
   # GET /links/1.json
   # def show
@@ -41,6 +49,7 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if link.save
+        current_user.tag(@link, with: @link.tag_list, on: :tags)
         UrlScrapperJob.perform_later @link.id
         format.html { redirect_to links_url, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
@@ -56,6 +65,7 @@ class LinksController < ApplicationController
   def update
     respond_to do |format|
       if link.update(link_params)
+        current_user.tag(@link, with: @link.tag_list, on: :tags)
         UrlScrapperJob.perform_later @link.id
         format.html { redirect_to links_url, notice: 'Link was successfully updated.' }
         format.json { render :show, status: :ok, location: @link }
