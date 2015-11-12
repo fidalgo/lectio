@@ -8,7 +8,8 @@ I have created this project with the purpose to exercise my Ruby on Rails skills
 
 **NOTE:** at the moment the tests are quite broken and incomplete, because I'm still figuring out to the the things working. After I have a minimal feature set, I will work on them.
 
-If have comments or suggestions please let me know, as my only purpose is to improve. See bellow on how to contact me.
+If have comments or suggestions please let me know, as my only purpose is to improve.
+See bellow on how to contact me.
 
 --------------------------------------------------------------------------------
 
@@ -18,6 +19,5 @@ Lectio is released under the [MIT License](http://www.opensource.org/licenses/MI
 --------------------------------------------------------------------------------
 
 ## Contact
-[@kanniball](https://twitter.com/kanniball)
-
+[Twitter](https://twitter.com/kanniball) //
 [StackOverflow](http://stackoverflow.com/users/1006863/paulo-fidalgo)
