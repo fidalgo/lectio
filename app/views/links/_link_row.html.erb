@@ -1,14 +1,15 @@
 <div class="col-md-3">
-  <div class="panel panel-default">
+  <div class="panel panel-info">
     <div class="panel-heading">
       <h3 class="panel-title">
         <%= link_to link.title, link.url, target: '_blank' %></h3>
       </div>
       <div class="panel-body">
         <%= link.description %>
-        <div class="well">
-          
-        </div>
+        <hr/>
+        <% link.tags_list.each do |tag| %>
+        <span class="label label-primary"><%= tag %></span>
+        <% end %>
       </div>
       <div class="panel-footer">
         <div class="row">
