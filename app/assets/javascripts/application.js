@@ -14,10 +14,13 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require select2
 //= require_tree .
 
 // Initialise all popover's
-options = { 'html': true};
-$(function () {
-  $('[data-toggle="popover"]').popover(options)
-})
+options = {
+  'html': true
+};
+$(function() {
+  $('[data-toggle="popover"]').popover(options);
+});

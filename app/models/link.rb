@@ -1,4 +1,6 @@
 class Link < ActiveRecord::Base
+  include Taggable
+
   validates_presence_of :url
   belongs_to :user
   paginates_per 16
@@ -16,9 +18,7 @@ class Link < ActiveRecord::Base
   protected
 
   def add_scheme_to_url
-    unless self.url[/\Ahttp:\/\//] || self.url[/\Ahttps:\/\//]
-      self.url = "http://#{self.url}"
-    end
+    self.url = "http://#{url}" unless url.match %r{^http}
   end
 
   #
