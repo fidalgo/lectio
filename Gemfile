@@ -15,6 +15,7 @@ gem 'devise_token_auth'
 gem 'delayed_job_active_record'
 gem 'kaminari'
 gem 'httparty'
+# gem 'select2-rails'#, '~> 3.5.9'
 
 group :development do
   gem 'better_errors'
@@ -41,4 +42,9 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'mutant-rspec'
+end
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-select2'
+  gem 'rails-assets-select2-bootstrap-css'
 end
