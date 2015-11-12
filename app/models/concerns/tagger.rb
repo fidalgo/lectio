@@ -8,14 +8,21 @@ module Tagger
 
   def tag(taggable, with)
     tag_names = with.flatten.uniq.map(&:strip).reject!(&:blank?)
-    tags_to_delete = taggable.tags_list - tag_names
+    delete_taggins(taggable, taggable.tags_list - tag_names)
     tag_names.each do |name|
       tag = Tag.where(name: name).first_or_create!
-      taggings.where(tag: tag, taggable: taggable, tagger_id: id).first_or_create!
+      taggings.where(tag: tag, taggable: taggable).first_or_create!
     end
   end
 
   def tags_list
     tags.pluck(:name)
+  end
+
+  def delete_taggins(taggable, tags_list)
+    tags_list.each do |tag_to_delete|
+      tag = Tag.where(name: tag_to_delete)
+      taggings.where(tag: tag, taggable: taggable).each(&:destroy)
+    end
   end
 end
