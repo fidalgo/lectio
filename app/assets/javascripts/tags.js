@@ -1,5 +1,5 @@
 $(document).on('page:change', function() {
-  $("#tags-input").select2({
+  $(".tags-input").select2({
     tags: true,
     width: '100%',
     tokenSeparators: [",", " "],
