@@ -1,5 +1,6 @@
+
+
 <div class="container-fluid">
-  <div class="well well-lg">
     <% @links.each_slice(4) do |link_set| %>
     <div class="row">
       <% link_set.each do |link| %>
@@ -9,9 +10,6 @@
       <% end %>
     </div>
     <% end %>
-  </div>
   <%= paginate @links %>
 </div>
 <br>
-
-<%= link_to 'New Link', new_link_path %>

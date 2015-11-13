@@ -25,7 +25,7 @@
 <% end %>
 
 <div class="form-group field">
-  <%= f.label :tags_list, 'tagsinput '%><br>
+  <%= f.label :tags_list%><br>
   <%= f.select :tags_list, @link.tags_list, {},
   {multiple: true, class: 'form-control tags-input', include_hidden: true} %>
 </div>
