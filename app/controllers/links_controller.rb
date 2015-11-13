@@ -6,6 +6,7 @@ class LinksController < ApplicationController
   # GET /links.json
   def index
     @links = current_user.links.order(read: :asc).order(created_at: :desc).page params[:page]
+    redirect_to page_path('help') if @links.empty?
   end
 
   # GET /tags/#{query}.json
@@ -15,7 +16,7 @@ class LinksController < ApplicationController
       render json: current_user.tags.where('name LIKE ?', "%#{params[:query]}%")
     else
       render json: current_user.tags
-end
+    end
 end
 
   def read
