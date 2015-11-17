@@ -1,15 +1,13 @@
-
-
 <div class="container-fluid">
-    <% @links.each_slice(4) do |link_set| %>
-    <div class="row">
-      <% link_set.each do |link| %>
-      <div id='link_<%= link.id %>'>
-        <%= render partial: 'link_row', locals: {link: link} %>
-      </div>
-      <% end %>
+  <% @links.each_slice(4) do |link_set| %>
+  <div class="row">
+    <% link_set.each do |link| %>
+    <div class="col-md-3" id='link_<%= link.id %>'>
+      <%= render partial: 'link_row', locals: {link: link} %>
     </div>
     <% end %>
+  </div>
+  <% end %>
   <%= paginate @links %>
 </div>
 <br>
