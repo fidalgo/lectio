@@ -1,16 +1,13 @@
 class Link < ActiveRecord::Base
   include Taggable
 
-  validates_presence_of :url
+  validates_presence_of :url, :user, :read
   belongs_to :user
   paginates_per 16
 
   before_save :add_scheme_to_url
 
-  # after_save do |link|
-  #   UrlScrapperJob.perform_later link.id
-  # end
-
+  # TODO: this will be moved to i18n later
   def status
     read ? 'readed' : 'unreaded'
   end
@@ -18,11 +15,6 @@ class Link < ActiveRecord::Base
   protected
 
   def add_scheme_to_url
-    self.url = "http://#{url}" unless url.match %r{^http}
+    self.url = "http://#{url}" unless url.match(/^http/)
   end
-
-  #
-  # def description
-  #   title ? title : url
-  # end
 end
