@@ -22,6 +22,7 @@ group :development do
   gem 'rails_layout'
   # gem 'spring-commands-rspec'
   gem 'bullet'
+  gem 'letter_opener'
 end
 group :development, :test do
   gem 'factory_girl_rails'
