@@ -40,6 +40,9 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # As advised by devise
-  config.action_mailer.default_url_options = { host: Rails::Server.new.options[:Host], port: Rails::Server.new.options[:Port] }
+  if defined? Rails::Server
+    config.action_mailer.default_url_options =
+      { host: Rails::Server.new.options[:Host], port: Rails::Server.new.options[:Port] }
+end
   config.action_mailer.delivery_method = :letter_opener
 end
