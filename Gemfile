@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
-gem 'rails', '4.2.4'
+ruby '2.2.4'
+gem 'rails', '4.2.5.1'
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -15,7 +15,6 @@ gem 'devise_token_auth'
 gem 'delayed_job_active_record'
 gem 'kaminari'
 gem 'httparty'
-# gem 'select2-rails'#, '~> 3.5.9'
 
 group :development do
   gem 'better_errors'
