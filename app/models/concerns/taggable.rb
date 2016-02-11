@@ -10,6 +10,4 @@ module Taggable
     tags.pluck(:name)
   end
 
-  def tags_list=(tags)
-  end
 end
