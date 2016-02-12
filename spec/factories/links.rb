@@ -3,7 +3,7 @@ FactoryGirl.define do
     url { Faker::Internet.url }
     title { Faker::Hipster.sentence }
     description { Faker::Hipster.paragraph }
-    read [false, true].sample
+    read { [false, true].sample }
     user
   end
 end

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Link, type: :model do
+  it_behaves_like 'taggable'
   context 'db' do
     context 'indexes' do
       it { should have_db_index(:user_id) }
@@ -52,7 +53,7 @@ RSpec.describe Link, type: :model do
       expect(link).to validate_presence_of(:user)
     end
     it 'requires read' do
-      expect(link).to validate_presence_of(:read)
+      expect([true, false]).to include(link.read)
     end
   end
 

@@ -9,5 +9,4 @@ module Taggable
   def tags_list
     tags.pluck(:name)
   end
-
 end
