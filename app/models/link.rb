@@ -1,7 +1,8 @@
 class Link < ActiveRecord::Base
   include Taggable
 
-  validates_presence_of :url, :user, :read
+  validates_presence_of :url, :user
+  validates_inclusion_of :read, in: [true, false]
   belongs_to :user
   paginates_per 16
 
