@@ -7,8 +7,8 @@ feature 'Help page' do
   #   Given I am a visitor
   #   When I visit the 'help' page
   #   Then I see "Help the Website"
-  scenario 'Visit the help page' do
-    visit 'pages/help'
-    expect(page).to have_content 'Help the Website'
-  end
+  # scenario 'Visit the help page' do
+  #   visit 'pages/help'
+  #   expect(page).to have_content 'Help the Website'
+  # end
 end
