@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204124040) do
+ActiveRecord::Schema.define(version: 20160227155554) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -42,11 +42,11 @@ ActiveRecord::Schema.define(version: 20160204124040) do
   add_index "links", ["user_id"], name: "index_links_on_user_id"
 
   create_table "taggings", force: :cascade do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
+    t.integer  "tag_id",        null: false
+    t.integer  "taggable_id",   null: false
+    t.string   "taggable_type", null: false
+    t.integer  "tagger_id",     null: false
+    t.string   "tagger_type",   null: false
     t.datetime "created_at"
   end
 
@@ -55,10 +55,12 @@ ActiveRecord::Schema.define(version: 20160204124040) do
   add_index "taggings", ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                                null: false

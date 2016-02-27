@@ -1,5 +1,5 @@
 class Tagging < ActiveRecord::Base
-  belongs_to :tag
-  belongs_to :taggable, polymorphic: true
-  belongs_to :tagger, polymorphic: true
+  belongs_to :tag, required: true
+  belongs_to :taggable, polymorphic: true, required: true
+  belongs_to :tagger, polymorphic: true, required: true
 end

@@ -3,7 +3,7 @@ class Link < ActiveRecord::Base
 
   validates_presence_of :url, :user
   validates_inclusion_of :read, in: [true, false]
-  belongs_to :user
+  belongs_to :user, required: true
   paginates_per 16
 
   before_save :add_scheme_to_url
