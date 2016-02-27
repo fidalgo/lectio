@@ -7,7 +7,7 @@ module Tagger
   end
 
   def tag(taggable, with)
-    tag_names = with.flatten.uniq.map(&:strip).reject!(&:blank?)
+    tag_names = with.flatten.uniq.map(&:strip).reject(&:blank?)
     delete_taggins(taggable, taggable.tags_list - tag_names)
     tag_names.each do |name|
       tag = Tag.where(name: name).first_or_create!
@@ -18,6 +18,8 @@ module Tagger
   def tags_list
     tags.pluck(:name)
   end
+
+  private
 
   def delete_taggins(taggable, tags_list)
     tags_list.each do |tag_to_delete|
