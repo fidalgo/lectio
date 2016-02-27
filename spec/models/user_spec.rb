@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  it_behaves_like 'tagger'
   context 'db' do
     context 'indexes' do
       it { should have_db_index(:email) } # .with_options(unique: true) }
