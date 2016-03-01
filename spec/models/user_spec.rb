@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
 
     context 'validation' do
       it 'has many links' do
-        expect(build(:user)).to have_many(:links)
+        expect(build(:user)).to have_many(:links).dependent(:destroy)
       end
     end
   end
