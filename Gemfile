@@ -15,6 +15,7 @@ gem 'delayed_job_active_record'
 gem 'kaminari'
 gem 'httparty'
 gem 'select2-rails'
+gem 'daemons'
 
 group :development do
   gem 'web-console'
@@ -24,6 +25,7 @@ group :development do
   # gem 'spring-commands-rspec'
   gem 'bullet'
   gem 'letter_opener'
+  gem 'activerecord-import'
 end
 group :development, :test do
   gem 'factory_girl_rails'
