@@ -47,7 +47,6 @@ end
     respond_to do |format|
       if link.save
         current_user.tag(@link, link_params['tags_list'])
-        UrlScrapperJob.perform_later @link.id
         format.html { redirect_to links_url, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else

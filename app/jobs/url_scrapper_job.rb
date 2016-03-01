@@ -4,6 +4,7 @@ class UrlScrapperJob < ActiveJob::Base
 
   def perform(link_id)
     link = Link.find(link_id)
+    url = link.url.match(/^http/) ? link.url : "http://#{link.url}"
     response = HTTParty.get(link.url)
     page = Nokogiri::HTML(response.body, nil, 'UTF-8')
     title = page.search('title').inner_text

@@ -6,7 +6,7 @@ class Link < ActiveRecord::Base
   belongs_to :user, required: true
   paginates_per 16
 
-  before_save :add_scheme_to_url
+  after_save :update_title_and_description
 
   # TODO: this will be moved to i18n later
   def status
@@ -15,7 +15,7 @@ class Link < ActiveRecord::Base
 
   protected
 
-  def add_scheme_to_url
-    self.url = "http://#{url}" unless url.match(/^http/)
+  def update_title_and_description
+    UrlScrapperJob.perform_later id
   end
 end
