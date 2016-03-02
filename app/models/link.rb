@@ -1,6 +1,8 @@
 class Link < ActiveRecord::Base
   include Taggable
 
+  default_scope { order(:read, updated_at: :desc) }
+
   validates_presence_of :url, :user
   validates_inclusion_of :read, in: [true, false]
   belongs_to :user, required: true
