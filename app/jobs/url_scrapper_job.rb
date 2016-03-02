@@ -5,8 +5,8 @@ class UrlScrapperJob < ActiveJob::Base
   def perform(link_id)
     link = Link.find(link_id)
     url = link.url.match(/^http/) ? link.url : "http://#{link.url}"
-    response = HTTParty.get(link.url)
-    page = Nokogiri::HTML(response.body, nil, 'UTF-8')
+    response = HTTParty.get(url)
+    page = Nokogiri::HTML(response.body)
     title = page.search('title').inner_text
     logger.info "URL: #{link.url} Title: #{title}"
     description = page.xpath("//meta[case_insensitive_include(@name, 'description')
