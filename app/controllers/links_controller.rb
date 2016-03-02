@@ -5,7 +5,7 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @links = current_user.links.order(read: :asc).order(created_at: :desc).page params[:page]
+    @links = current_user.links.page params[:page]
     redirect_to page_path('help') if @links.empty?
   end
 
@@ -25,6 +25,7 @@ end
       if link.save
         flash.notice = "The link was marked as #{link.status}!"
         format.js {}
+        format.html {redirect_to links_url}
       end
     end
   end
