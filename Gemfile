@@ -32,7 +32,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'byebug'
-
+  gem 'binding_of_caller'
   # gem 'spring'
   gem 'pry-rails'
   gem 'pry-byebug'

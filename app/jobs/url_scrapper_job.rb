@@ -8,10 +8,12 @@ class UrlScrapperJob < ActiveJob::Base
     response = HTTParty.get(url)
     page = Nokogiri::HTML(response.body)
     title = page.search('title').inner_text
+    title = title.valid_encoding? ? title : nil
     logger.info "URL: #{link.url} Title: #{title}"
     description = page.xpath("//meta[case_insensitive_include(@name, 'description')
       or case_insensitive_include(@property, 'description')]/@content",
                              XpathFunctions.new).text
+    description = description.valid_encoding? ? description : nil
     link.update(title: title, description: description)
   end
 end
