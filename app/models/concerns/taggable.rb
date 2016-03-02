@@ -9,4 +9,9 @@ module Taggable
   def tags_list
     tags.pluck(:name)
   end
+
+  # needed for saving the tag list.
+  # Need refactoring to use only the tags relationship
+  def tags_list=(tags)
+  end
 end
