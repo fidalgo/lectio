@@ -25,7 +25,7 @@ end
       if link.save
         flash.notice = "The link was marked as #{link.status}!"
         format.js {}
-        format.html {redirect_to links_url}
+        format.html { redirect_to links_url }
       end
     end
   end

@@ -9,7 +9,7 @@ require 'httparty'
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.where(email: 'admin@example.com').first.destroy
+User.where(email: 'admin@example.com').destroy_all
 user = User.create email: 'admin@example.com', password: 'password', password_confirmation: 'password', name: 'Admin'
 
 list_url = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip'

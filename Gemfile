@@ -26,6 +26,7 @@ group :development do
   gem 'bullet'
   gem 'letter_opener'
   gem 'activerecord-import'
+  gem 'brakeman', :require => false
 end
 group :development, :test do
   gem 'factory_girl_rails'
