@@ -11,3 +11,8 @@ Lectio is released under the [MIT License](http://www.opensource.org/licenses/MI
 ## Contact
 [Twitter](https://twitter.com/kanniball) //
 [StackOverflow](http://stackoverflow.com/users/1006863/paulo-fidalgo)
+
+
+The OpenShift `ruby` cartridge documentation can be found at:
+
+http://openshift.github.io/documentation/oo_cartridge_guide.html#ruby
