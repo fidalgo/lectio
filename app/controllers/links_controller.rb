@@ -17,7 +17,7 @@ class LinksController < ApplicationController
     else
       render json: current_user.tags
     end
-end
+  end
 
   def read
     link.read = link.read ? false : true
