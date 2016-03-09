@@ -10,11 +10,18 @@ class UrlScrapperJob < ActiveJob::Base
     title = page.search('title').inner_text
     title = title.valid_encoding? ? title : nil
     logger.info "URL: #{link.url} Title: #{title}"
-    description = page.xpath("//meta[case_insensitive_include(@name, 'description')
+    link.update title: title, description: page_description(page)
+  end
+
+  def page_description(page)
+    # Since there are sites with more than one description (ex. the opengraph )
+    # properties whe get the first one.
+    descriptions = page.xpath("//meta[case_insensitive_include(@name, 'description')
       or case_insensitive_include(@property, 'description')]/@content",
-                             XpathFunctions.new).text
-    description = description.valid_encoding? ? description : nil
-    link.update(title: title, description: description)
+                              XpathFunctions.new)
+    descriptions.each do |description|
+      return description.text unless description.nil? || !description.text.valid_encoding?
+    end
   end
 end
 
