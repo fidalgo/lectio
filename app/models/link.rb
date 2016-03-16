@@ -8,14 +8,10 @@ class Link < ActiveRecord::Base
   belongs_to :user, required: true
   paginates_per 16
 
-  after_create :update_title_and_description
-
   # TODO: this will be moved to i18n later
   def status
     read ? 'readed' : 'unreaded'
   end
-
-  protected
 
   def update_title_and_description
     UrlScrapperJob.perform_later id

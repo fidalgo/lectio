@@ -47,6 +47,7 @@ class LinksController < ApplicationController
     link.user = current_user
     respond_to do |format|
       if link.save
+        link.update_title_and_description
         current_user.tag(@link, link_params['tags_list'])
         format.html { redirect_to links_url, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
@@ -60,11 +61,10 @@ class LinksController < ApplicationController
   # PATCH/PUT /links/1
   # PATCH/PUT /links/1.json
   def update
-    logger.info "TAGS: #{@link.tags}"
     respond_to do |format|
       if link.update(link_params)
+        link.update_title_and_description
         current_user.tag(@link, link_params['tags_list'])
-        UrlScrapperJob.perform_later @link.id
         format.html { redirect_to links_url, notice: 'Link was successfully updated.' }
         format.json { render :show, status: :ok, location: @link }
       else
