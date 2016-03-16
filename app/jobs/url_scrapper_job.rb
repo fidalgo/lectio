@@ -5,6 +5,7 @@ class UrlScrapperJob < ActiveJob::Base
   def perform(link_id)
     link = Link.find(link_id)
     url = link.url.match(/^http/) ? link.url : "http://#{link.url}"
+    # TODO: handle exceptions retrying with the www
     response = HTTParty.get(url)
     page = Nokogiri::HTML(response.body)
     title = page.search('title').inner_text
