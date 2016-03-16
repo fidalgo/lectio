@@ -37,13 +37,13 @@ feature 'Displaying Saved Links' do
   end
 
   scenario 'User marks link as unread' do
-    link = FactoryGirl.create(:link, user: user)
+    link = FactoryGirl.create(:link, user: user, read: false)
     expect(link.read).to eq(false)
     visit read_link_path(link)
-    link = Link.find(link.id)
+    link.reload
     expect(link.read).to eq(true)
     visit read_link_path(link)
-    link = Link.find(link.id)
+    link.reload
     expect(link.read).to eq(false)
   end
 end
