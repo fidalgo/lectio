@@ -11,23 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227155554) do
+ActiveRecord::Schema.define(version: 20160309230527) do
 
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "links", force: :cascade do |t|
     t.string   "url",                         null: false
@@ -39,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160227155554) do
     t.string   "description"
   end
 
-  add_index "links", ["user_id"], name: "index_links_on_user_id"
+  add_index "links", ["user_id"], name: "index_links_on_user_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        null: false
@@ -50,9 +37,9 @@ ActiveRecord::Schema.define(version: 20160227155554) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
-  add_index "taggings", ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
-  add_index "taggings", ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id", using: :btree
+  add_index "taggings", ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name",       null: false
@@ -60,7 +47,7 @@ ActiveRecord::Schema.define(version: 20160227155554) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                                null: false
@@ -78,7 +65,7 @@ ActiveRecord::Schema.define(version: 20160227155554) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
