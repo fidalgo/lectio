@@ -1,1 +1,2 @@
-RAILS_ENV=production $OPENSHIFT_REPO_DIR/bin/delayed_job start
+#!/bin/bash
+#RAILS_ENV=production $OPENSHIFT_REPO_DIR/bin/delayed_job start
