@@ -6,6 +6,7 @@ class Link < ActiveRecord::Base
   validates_presence_of :url, :user
   validates_inclusion_of :read, in: [true, false]
   belongs_to :user, required: true
+  validates_uniqueness_of :url, scope: :user_id
   paginates_per 16
 
   # TODO: this will be moved to i18n later
