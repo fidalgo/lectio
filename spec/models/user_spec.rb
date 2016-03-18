@@ -20,6 +20,7 @@ RSpec.describe User, type: :model do
       it { should have_db_column(:last_sign_in_at).of_type(:datetime) }
       it { should have_db_column(:current_sign_in_ip).of_type(:string) }
       it { should have_db_column(:last_sign_in_ip).of_type(:string) }
+      it { should have_db_column(:role).of_type(:integer).with_options(default: User.roles['user'], null: false) }
     end
 
     context 'attributes' do

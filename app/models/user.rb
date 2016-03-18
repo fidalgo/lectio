@@ -7,4 +7,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :links, dependent: :destroy
+
+  enum role: [:admin, :user]
+  after_initialize :set_default_role, if: :new_record?
+
+  def set_default_role
+    self.role ||= :user
+  end
 end
