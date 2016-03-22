@@ -18,6 +18,7 @@ gem 'daemons'
 gem 'puma'
 gem 'pg'
 gem 'sidekiq'
+gem 'activeadmin', '~> 1.0.0.pre2'
 
 group :development do
   gem 'web-console'
