@@ -4,14 +4,11 @@ class UrlScrapperJob < ActiveJob::Base
 
   def perform(link_id)
     link = Link.find(link_id)
-    url = link.url.match(/^http/) ? link.url : "http://#{link.url}"
+    url = link.url =~ /^http/ ? link.url : "http://#{link.url}"
     # TODO: handle exceptions retrying with the www
     response = HTTParty.get(url)
     page = Nokogiri::HTML(response.body)
-    title = page.search('title').inner_text
-    title = title.valid_encoding? ? title : nil
-    logger.info "URL: #{link.url} Title: #{title}"
-    link.update title: title, description: page_description(page)
+    link.update title: page_title(page), description: page_description(page)
   end
 
   def page_description(page)
@@ -21,14 +18,21 @@ class UrlScrapperJob < ActiveJob::Base
       or case_insensitive_include(@property, 'description')]/@content",
                               XpathFunctions.new)
     descriptions.each do |description|
-      return description.text unless description.nil? || !description.text.valid_encoding?
+      if !description.nil? && description.text.valid_encoding?
+        return description.text
+      end
     end
   end
-end
 
-# Allow to seach with insensitive case
-class XpathFunctions
-  def case_insensitive_include(node_set, str_to_match)
-    node_set.find_all { |node| node.to_s.downcase.include? str_to_match.to_s.downcase }
+  def page_title(page)
+    title = page.search('title').inner_text
+    return title if title.valid_encoding? && !title.blank?
+  end
+
+  # Allow to seach with insensitive case
+  class XpathFunctions
+    def case_insensitive_include(node_set, str_to_match)
+      node_set.find_all { |node| node.to_s.downcase.include? str_to_match.to_s.downcase }
+    end
   end
 end
