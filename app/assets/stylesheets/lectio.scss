@@ -3,11 +3,19 @@ body {
   background-color: #393f3f;
   padding-top: 50px;
   font-family: 'Lato', sans-serif;
-  color: #9d9d9d
+  color: #9d9d9d;
 }
 main {
   background-color: #393f3f;
 }
 footer {
   background-color: #4a5252;
+}
+.panel-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: normal;
+  width: 90%;
+  padding-top: 8px;
 }
