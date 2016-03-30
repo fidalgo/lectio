@@ -48,4 +48,5 @@ group :test do
   gem 'simplecov', require: false
   gem 'mutant-rspec'
   gem 'shoulda-matchers'
+  gem 'webmock'
 end
