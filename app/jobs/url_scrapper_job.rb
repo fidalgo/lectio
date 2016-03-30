@@ -1,15 +1,29 @@
 # Fetches the URL and get the Title to update the Link
 class UrlScrapperJob < ActiveJob::Base
-  queue_as :default
+  queue_as :url_scrapper
+  REDIRECT_LIMIT = 10
 
   def perform(link_id)
     link = Link.find(link_id)
     url = link.url =~ /^http/ ? link.url : "http://#{link.url}"
-    # TODO: handle exceptions retrying with the www
-    response = HTTParty.get(url)
-    page = Nokogiri::HTML(response.body)
-    link.update title: page_title(page), description: page_description(page)
+    @uri = URI.parse url
+    headers = fetch_headers
+    case headers.content_type
+    when /application/
+      filename = File.basename(@uri.path)
+      link.update title: filename
+    # when /html/
+    #   response = fetch_page
+    #   page = Nokogiri::HTML(response)
+    #   link.update title: page_title(page), description: page_description(page)
+    else
+      response = fetch_page
+      page = Nokogiri::HTML(response)
+      link.update title: page_title(page), description: page_description(page)
+    end
   end
+
+  private
 
   def page_description(page)
     # Since there are sites with more than one description (ex. the opengraph )
@@ -17,16 +31,61 @@ class UrlScrapperJob < ActiveJob::Base
     descriptions = page.xpath("//meta[case_insensitive_include(@name, 'description')
       or case_insensitive_include(@property, 'description')]/@content",
                               XpathFunctions.new)
+    page_description = ''
     descriptions.each do |description|
-      if !description.nil? && description.text.valid_encoding?
-        return description.text
-      end
+      next unless !description.nil? && description.text.valid_encoding?
+      page_description = description.text if description.text.length > page_description.length
     end
+    return page_description.strip unless page_description.blank?
   end
 
   def page_title(page)
     title = page.search('title').inner_text
     return title if title.valid_encoding? && !title.blank?
+  end
+
+  def fetch_headers(limit = REDIRECT_LIMIT)
+    # You should choose a better exception.
+    raise ArgumentError, 'too many HTTP redirects' if limit == 0
+    http = Net::HTTP.new(@uri.host, @uri.port)
+    http.use_ssl = true if @uri.scheme == 'https'
+    request_uri = @uri.request_uri.nil? ? '/' : @uri.request_uri
+    http.request_head(request_uri) do |response|
+      case response
+      when Net::HTTPSuccess then
+        return response
+      when Net::HTTPRedirection then
+        location = response['location']
+        parsed_location = URI.parse location
+        @uri = parsed_location.absolute? ? parsed_location : @uri.merge(parsed_location)
+        return fetch_headers(limit - 1)
+      when Net::HTTPMethodNotAllowed then
+        return response
+      else
+        return response.value
+      end
+    end
+  end
+
+  def fetch_page(limit = REDIRECT_LIMIT)
+    # You should choose a better exception.
+    raise ArgumentError, 'too many HTTP redirects' if limit == 0
+    http = Net::HTTP.new(@uri.host, @uri.port)
+    http.use_ssl = true if @uri.scheme == 'https'
+    request_uri = @uri.request_uri.nil? ? '/' : @uri.request_uri
+    http.request_get(request_uri) do |response|
+      case response
+      when Net::HTTPSuccess then
+        return response.body
+      when Net::HTTPRedirection then
+        location = response['location']
+        parsed_location = URI.parse location
+        @uri = parsed_location.absolute? ? parsed_location : @uri.merge(parsed_location)
+        return fetch_page(limit - 1)
+      else
+        return response.value
+      end
+    end
   end
 
   # Allow to seach with insensitive case
