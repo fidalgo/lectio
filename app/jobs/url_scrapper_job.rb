@@ -4,26 +4,38 @@ class UrlScrapperJob < ActiveJob::Base
   REDIRECT_LIMIT = 10
 
   def perform(link_id)
-    link = Link.find(link_id)
-    url = link.url =~ /^http/ ? link.url : "http://#{link.url}"
-    @uri = URI.parse url
-    headers = fetch_headers
-    case headers.content_type
-    when /application/
-      filename = File.basename(@uri.path)
-      link.update title: filename
-    # when /html/
-    #   response = fetch_page
-    #   page = Nokogiri::HTML(response)
-    #   link.update title: page_title(page), description: page_description(page)
-    else
-      response = fetch_page
-      page = Nokogiri::HTML(response)
-      link.update title: page_title(page), description: page_description(page)
-    end
+    @link = Link.find_by_id(link_id)
+    process unless @link.nil?
   end
 
   private
+
+  def process
+    url = @link.url =~ /^http/ ? @link.url : "http://#{@link.url}"
+    @uri = URI.parse url
+    handle_headers
+  end
+
+  def handle_headers
+    headers = fetch_headers
+    case headers.content_type
+    when /application/
+      handle_application
+    else
+      handle_html
+    end
+  end
+
+  def handle_application
+    filename = File.basename(@uri.path)
+    @link.update title: filename
+  end
+
+  def handle_html
+    response = fetch_page
+    page = Nokogiri::HTML(response)
+    @link.update title: page_title(page), description: page_description(page)
+  end
 
   def page_description(page)
     # Since there are sites with more than one description (ex. the opengraph )
