@@ -1,0 +1,8 @@
+---
+:pidfile: tmp/pids/sidekiq.pid
+development:
+  :concurrency: 50
+production:
+  :concurrency: 25
+:queues:
+  - lectio_url_scrapper
