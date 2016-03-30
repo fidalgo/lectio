@@ -16,7 +16,6 @@ namespace :data do
 
     file = Tempfile.new('top-1m.csv.zip')
     file.binmode
-    # begin
     file.write HTTParty.get(list_url).parsed_response
     links = []
     Zip::InputStream.open(file) do |input_stream|
@@ -26,11 +25,8 @@ namespace :data do
         links << [user.id, line.strip.split(',').last]
       end
     end
-    # ensure
-    #   file.close
-    #   file.unlink
-    # end
     columns = [:user_id, :url]
     Link.import columns, links, validate: false
+    Link.where(user: user).pluck(:id).each { |id| UrlScrapperJob.perform_later id }
   end
 end
