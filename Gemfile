@@ -18,6 +18,7 @@ gem 'daemons'
 gem 'puma'
 gem 'pg'
 gem 'sidekiq'
+gem 'rubyzip'
 
 group :development do
   gem 'web-console'
