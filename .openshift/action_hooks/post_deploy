@@ -1,3 +1,0 @@
-#!/bin/bash
-#RAILS_ENV=production $OPENSHIFT_REPO_DIR/bin/delayed_job start
-cd $OPENSHIFT_REPO_DIR && bundle exec sidekiq

@@ -9,6 +9,7 @@ port ENV['PORT'] || 3000
 environment ENV['RACK_ENV'] || 'development'
 
 on_worker_boot do
+  @sidekiq_pid ||= spawn('bundle exec sidekiq') unless ENV['RACK_ENV'] == 'development'
   ActiveSupport.on_load(:active_record) do
     ActiveRecord::Base.establish_connection
   end
